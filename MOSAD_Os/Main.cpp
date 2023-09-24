@@ -41,7 +41,7 @@ int main()
     }
     
     Output::showOnlyObjectives(P);
-    Output::saveSolutionSet(P,"Population.txt");
+    //Output::saveSolutionSet(P,"Population.txt");
 }
 
 
