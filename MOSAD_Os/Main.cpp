@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "headers/MOSAD_O.h"
 #include "headers/MOSAD_O_II.h"
+#include "headers/Output.h"
 
 
 
@@ -39,46 +40,11 @@ int main()
         P = algo->getSolutionSet();
     }
     
-    showAllSolutions(P);
+    Output::showOnlyObjectives(P);
+    Output::saveSolutionSet(P,"Population.txt");
 }
 
-void showAllSolutions(SolutionSet P)
-{
-    for (int i = 0; i < P.size(); i++)
-    {
-        std::cout << i + 1 << ") ";
-        showSolution(P.get(i), 1);
-        std::cout << "\n";
-    }
-}
 
-void showSolution(Solution s, int vista)
-{
-    int var = 0;
-    int objs = 0;
-    var = s.getNumVariables();
-    objs = s.getNumObjectives();
-    if (vista == 2)
-    {
-        std::cout << "[";
-        for (int i = 0; i < var; i++)
-        {
-            std::cout << s.getVariableValue(i);
-            std::cout << " ";
-        }
-        std::cout << "] ";
-    }
-    if (vista <= 1)
-    {
-        std::cout << "[";
-        for (int i = 0; i < objs; i++)
-        {
-            std::cout << s.getObjective(i);
-            std::cout << " ";
-        }
-        std::cout << "]";
-    }
-}
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
 

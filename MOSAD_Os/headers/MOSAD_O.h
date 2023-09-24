@@ -1,11 +1,10 @@
 #pragma once
 /*
-* Implementacion de algoritmo MOSA de (Phillippe Engrand, 1998) - A multi-objective optimization approach based on simulated annealing and its application to nuclear fuel management.
+* Implementation of MOSAD_O algorithm
 */
 #include "../headers/metaheuristics/Algorithm.h"
 #include "../headers/instances/Instance.h"
 #include "../headers/tools/data/Interval.h"
-
 #include "../headers/tools/builders/ProblemBuilder.h"
 #include "../headers/tools/builders/CrossoverBuilder.h"
 #include "../headers/tools/operators/interval/CrossoverOperator.h"

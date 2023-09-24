@@ -145,10 +145,12 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="sources\MOSAD_O.cpp" />
     <ClCompile Include="sources\MOSAD_O_II.cpp" />
+    <ClCompile Include="sources\Output.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\MOSAD_O.h" />
     <ClInclude Include="headers\MOSAD_O_II.h" />
+    <ClInclude Include="headers\Output.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

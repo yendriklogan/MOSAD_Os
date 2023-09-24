@@ -24,12 +24,18 @@
     <ClCompile Include="sources\MOSAD_O_II.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sources\Output.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\MOSAD_O.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="headers\MOSAD_O_II.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Output.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
