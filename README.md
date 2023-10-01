@@ -7,6 +7,6 @@ Multi-objective Simulated Annealing Based on Decomposition and Outranking softwa
 # Installation
 - Clone this repo to your local machine using `https://github.com/yendriklogan/MOSAD_Os.git`
 # Usage
-1. Open the solution file MOSAD_Os.sln
+1. Open the solution file "MOSAD_Os.sln"
 2. Write the code to use it, see the documentation on [Wiki](https://github.com/yendriklogan/MOSAD_Os/wiki)
 3. Run the solution (Debug x86)
