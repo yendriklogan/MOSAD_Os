@@ -4,25 +4,27 @@
 #Tf 0.0000001
 #L 2
 #alpha 0.98
-#Problem-Instance M_Problem.txt //Problem file
+
+#Problem-Instance M_Problem.txt
 
 #WeightVectorModel CAModel
 #CAModel-NumberOfVectors 100
-#CAModel-NumberOfObjectives 3
+#CAModel-NumberOfObjectives 05
 #DEmutation RandOneDEMutation
 #RandOneDEMutation-scaleFactor 0.5
 #crossover BinomialCrossover
 #BinomialCrossover-crossoverRate 0.2
 
 #outranking-model FDEA_Outranking
-#NUM-OBJS 3
-#DM-ID 1
-#WEIGHTS
-0.244	0.420	0.247	0.425	0.244	0.420
-#VETOES
-325.516	363.406	327.572	338.428	328.825	374.018
-#ALPHA
-0.510 0.750
+#NUM-OBJS 05
+#DM-ID DM01
+#WEIGHTS 
+ 0.082 0.146 0.161 0.287 0.198 0.354 0.229 0.409 0.048 0.086
+#VETOES 
+ 230.796 239.736 213.855 223.208 195.691 236.871 209.92 216.314 243.196 274.022
+
+#ALPHA 0.66 0.66
 
 #NUM-INITIAL-SOLS 0
-=======================================================================================
+
+
