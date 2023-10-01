@@ -4,10 +4,9 @@ Multi-objective Simulated Annealing Based on Decomposition and Outranking softwa
 - Windows O.S.
 - Visual Studio 2019 Community or above
   - C++
-# Instalation
+# Installation
 - Clone this repo to your local machine using `https://github.com/yendriklogan/MOSAD_Os`
 # Usage
-- Open the solution file MOSAD_Os.sln
-- Setup the experiment (See the [Wiki](https://github.com/yendriklogan/MOSAD_Os/wiki))
-- Run the solution with the configuration Debug, x86, Local Windows Debuguer
-# Example
+1. Open the solution file MOSAD_Os.sln
+2. Write the code to use it, see the documentation on [Wiki](https://github.com/yendriklogan/MOSAD_Os/wiki)
+3. Run the solution (Debug x86)
