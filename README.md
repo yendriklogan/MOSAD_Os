@@ -1,5 +1,5 @@
 # MOSAD_Os
-Multi-objective Simulated Annealing Based on Decomposition and Outranking
+Multi-objective Simulated Annealing Based on Decomposition and Outranking software
 # Prerequisites
 - Windows O.S.
 - Visual Studio 2019 Community or above
