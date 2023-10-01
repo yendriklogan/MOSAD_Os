@@ -9,3 +9,4 @@ Multi-objective Simulated Annealing Based on Decomposition and Outranking
 # Usage
 - Open the solution file MOSAD_Os.sln
 - Run the solution with the configuration Debug, x86, Local Windows Debuguer
+# Example
