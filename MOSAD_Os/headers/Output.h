@@ -13,7 +13,7 @@ private:
 public:
     
     Output();
-    static void showVarAndObjs(SolutionSet P);
+    static void showVarsAndObjs(SolutionSet P);
     static void showOnlyVariables(SolutionSet P);
     static void showOnlyObjectives(SolutionSet P);
     static void saveSolutionSet(SolutionSet P, string fileName);

@@ -4,7 +4,6 @@
 #Tf 0.0000001
 #L 2
 #alpha 0.98
-
 #Problem-Instance M_Problem.txt //Problem file
 
 #WeightVectorModel CAModel
@@ -14,7 +13,6 @@
 #RandOneDEMutation-scaleFactor 0.5
 #crossover BinomialCrossover
 #BinomialCrossover-crossoverRate 0.2
-#repair PDTLZ_Repair
 
 #outranking-model FDEA_Outranking
 #NUM-OBJS 3

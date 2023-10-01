@@ -13,7 +13,7 @@ Output::Output() {
 
 }
 
-void Output::showVarAndObjs(SolutionSet P)
+void Output::showVarsAndObjs(SolutionSet P)
 {
     for (int i = 0; i < P.size(); i++)
     {
@@ -51,7 +51,7 @@ void Output::showSolution(Solution s, int vista)
     objs = s.getNumObjectives();
     if (vista == 2 || vista ==1)
     {
-        std::cout << "[";
+        std::cout << "[ ";
         for (int i = 0; i < var; i++)
         {
             std::cout << s.getVariableValue(i);
@@ -61,7 +61,7 @@ void Output::showSolution(Solution s, int vista)
     }
     if (vista == 3|| vista == 1)
     {
-        std::cout << "[";
+        std::cout << "[ ";
         for (int i = 0; i < objs; i++)
         {
             std::cout << s.getObjective(i);

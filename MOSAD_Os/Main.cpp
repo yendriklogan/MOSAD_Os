@@ -8,10 +8,6 @@
 #include "headers/Output.h"
 
 
-
-void showAllSolutions(SolutionSet P);
-void showSolution(Solution s, int vista);
-
 int main()
 {
 
@@ -39,9 +35,9 @@ int main()
         algo->execute();
         P = algo->getSolutionSet();
     }
-    
+
     Output::showOnlyObjectives(P);
-    //Output::saveSolutionSet(P,"Population.txt");
+
 }
 
 
