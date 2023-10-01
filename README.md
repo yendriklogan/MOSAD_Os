@@ -1,7 +1,7 @@
 # MOSAD_Os
 Multi-objective Simulated Annealing Based on Decomposition and Outranking software
 
-MOSAD_Os is a software that combines the MOSA/D algorithm with the Outranking preference model to produce MOSA/D-O and MOSA/D-O-II algorithms. Both algorithms are designed to manage problems (DTLZ1 to DTLZ7 and WFG1 to WFG9) with preferences for 5 and 10 objectives. The preferences model manages the uncertainty (in weights, vetoes, and the majority threshold) using intervals.
+MOSAD_Os is a software that combines the MOSA/D algorithm with the Outranking preference model to produce MOSA/D-O and MOSA/D-O-II algorithms. Both algorithms are designed to manage problems (DTLZ1 to DTLZ7 and WFG1 to WFG9) with preferences for 5 and 10 objectives. The preferences model uses intervals to manage the uncertainty (in weights, vetoes, and the majority threshold).
 
 # Prerequisites
 - Windows O.S.
