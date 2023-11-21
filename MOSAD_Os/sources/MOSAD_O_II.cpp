@@ -30,7 +30,7 @@ void MOSAD_O_II::initialize(Requirements* config) {
 
     this->param_ = *(config->load());
 
-    this->problem_ = ProblemBuilder::execute(this->param_.get("#Problem-Instance").getString());
+    this->problem_ = ProblemBuilder::execute(config);
 
     this->Ti = this->param_.get("#Ti").getDouble();
     this->Tf = this->param_.get("#Tf").getDouble();
@@ -43,8 +43,6 @@ void MOSAD_O_II::initialize(Requirements* config) {
     //Configure more specific algorithm data structures
     P= new SolutionSet(this->N, this->problem_);
     currentP = new SolutionSet(this->N, this->N, this->problem_);
-    //EP = new SolutionSet(this->maxEvaluations, this->problem_);
-    //PGenerations = new SolutionSet(this->maxEvaluations, this->problem_);
 
     randomSolutions =new SolutionSet(3, this->problem_);
     parents = new SolutionSet(2, this->problem_);
@@ -53,13 +51,10 @@ void MOSAD_O_II::initialize(Requirements* config) {
     trial = new Solution(this->problem_);
     abs = (Interval*)Constantes::generateVector(trial->getNumObjectives(), Constantes::INTERVAL);
    
-
-    /*this->repair = RepairBuilder::execute(config);*/
     this->DEMutation = DEMutationBuilder::execute(config);
     this->crossover = CrossoverBuilder::execute(config);
 
     this->om = (FDEA_Outranking*)OutrankingModelBuilder::execute(config);
-    //this->om = (PDTLZ_Outranking*)OutrankingModelBuilder::execute(config);
     this->om->setProblem(this->problem_);
 
     vectorWeights = WeightVectorBuilder::execute(config);
@@ -74,38 +69,13 @@ void MOSAD_O_II::initialize(Requirements* config) {
         Z_max[i] = Constantes::MINDOUBLE;
     }
     random = RandomNumber::getInstance();
-    //Definir INITIAL SET of solutions and load them
-    Instance* i = this->problem_->getInstance();
-    int num_is = this->param_.get("#NUM-INITIAL-SOLS").getInt();
-
-    if (num_is > 0) {
-        char sol_name[] = "#INITIAL-SOLUTIONS";
-
-        config->addMatrix("#INITIAL-SOLUTIONS", Constantes::DOUBLE, num_is, this->problem_->getNumberOfVariables());
-
-        this->param_ = *(config->load()); //hay que implementar una estrategai para que una llamada adicional a load no borre lo anterior
-
-        double** dsols = (double**)this->param_.get("#INITIAL-SOLUTIONS").getValue();
-        Interval** sols = (Interval**)Constantes::generateMatrix(num_is, this->problem_->getNumberOfVariables(), Constantes::INTERVAL);
-
-        for (int i = 0; i < num_is; ++i) {
-            for (int j = 0; j < this->problem_->getNumberOfVariables(); ++j) {
-                sols[i][j] = dsols[i][j];
-            }
-        }
-
-        this->initial_set = new SolutionSet(num_is, this->problem_);
-        *this->initial_set = this->problem_->generateFromSolutionSet(sols, num_is);
-    }
-
-    //Inicializar Estructuras Específicas del Algoritmo
     this->lastGeneration_.initialize(this->N, problem_);
 
 }
 
 void MOSAD_O_II::execute()
 {
-    //Generar la poblacion inicial P de tamaño N
+
     Solution newSolution(problem_);
 
     int MFE = maxEvaluations;
@@ -115,16 +85,11 @@ void MOSAD_O_II::execute()
         newSolution = problem_->generateRandomSolution();
         problem_->evaluate(&newSolution);
         problem_->evaluateConstraints(&newSolution);
-        //EP->add(newSolution);
         P->add(newSolution);
         obtainIdealPoint(newSolution);
         FE++;
     }
     
-    
-    /*ofstream out("MOSAD_initial_solutions.txt");
-    out << *P;
-    out.close();*/
 
     Solution current(this->problem_);
 
@@ -134,28 +99,22 @@ void MOSAD_O_II::execute()
 
     while (Ti >= Tf && FE <= MFE) {
 
-        //cout << "Evaluaciones" << FE<<"\n";
-        for (int k = 0; k < N; k++)//copiar la poblacion actual
+        for (int k = 0; k < N; k++)
         {
             currentP->set(k, P->get(k));
         }
 
-        for (int i = 0; i < N; i++)//por cada subproblema
+        for (int i = 0; i < N; i++)//for each sub-problem
         {
             //-----------------------------------------------------------           
             current = currentP->get(i);
             //-------------------------------------------
 
-            //actual = P->get(i);
-
             for (int j = 0; j < L; j++)
             {
                 FE++;
                 newSolution = perturbation(current);
-                //mutation->execute(nueva);
                 problem_->evaluate(&newSolution);
-                //problem_->evaluateConstraints(&nueva);
-                //this->EP->add(nueva);
 
                 double p = random->nextDouble();
                 double b = probabilityFunction(newSolution, current, Ti);
@@ -186,8 +145,6 @@ void MOSAD_O_II::execute()
         Ti = alpha * Ti;
     }
 
-    //mostrarArchivo1();
-
     this->last_ = *P;
 }
 
@@ -203,7 +160,6 @@ Solution MOSAD_O_II::perturbation(Solution original)
     n1 = random->nextInt(N - 1);
     n2 = random->nextInt(N - 1);
     n3 = random->nextInt(N - 1);
-    //n3 = aleatorio->nextInt(EP->size() - 1);
 
     randomSolutions->add(currentP->get(n1));
     randomSolutions->add(currentP->get(n2));

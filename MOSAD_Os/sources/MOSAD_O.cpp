@@ -28,7 +28,7 @@ void MOSAD_O::initialize(Requirements* config) {
     config->addValue("#NUM-INITIAL-SOLS", Constantes::INT);
 
     this->param_ = *(config->load());
-    this->problem_ = ProblemBuilder::execute(this->param_.get("#Problem-Instance").getString());
+    this->problem_ = ProblemBuilder::execute(config);
 
     this->Ti = this->param_.get("#Ti").getDouble();
     this->Tf = this->param_.get("#Tf").getDouble();
@@ -66,38 +66,13 @@ void MOSAD_O::initialize(Requirements* config) {
         Z_min[i] = Constantes::MAXDOUBLE;
         Z_max[i] = Constantes::MINDOUBLE;
     }
-    //Definir INITIAL SET of solutions and load them
-    Instance* i = this->problem_->getInstance();
-    int num_is = this->param_.get("#NUM-INITIAL-SOLS").getInt();
-
-    if (num_is > 0) {
-        char sol_name[] = "#INITIAL-SOLUTIONS";
-
-        config->addMatrix("#INITIAL-SOLUTIONS", Constantes::DOUBLE, num_is, this->problem_->getNumberOfVariables());
-
-        this->param_ = *(config->load()); //hay que implementar una estrategai para que una llamada adicional a load no borre lo anterior
-
-        double** dsols = (double**)this->param_.get("#INITIAL-SOLUTIONS").getValue();
-        Interval** sols = (Interval**)Constantes::generateMatrix(num_is, this->problem_->getNumberOfVariables(), Constantes::INTERVAL);
-
-        for (int i = 0; i < num_is; ++i) {
-            for (int j = 0; j < this->problem_->getNumberOfVariables(); ++j) {
-                sols[i][j] = dsols[i][j];
-            }
-        }
-
-        this->initial_set = new SolutionSet(num_is, this->problem_);
-        *this->initial_set = this->problem_->generateFromSolutionSet(sols, num_is);
-    }
-
-    //Inicializar Estructuras Específicas del Algoritmo
     this->lastGeneration_.initialize(this->N, problem_);
 
 }
 
 void MOSAD_O::execute()
 {
-    //Generar la poblacion inicial P de tamaño N
+    //Random initial population
     Solution newSolution(problem_);
 
     int MFE = maxEvaluations;
@@ -107,7 +82,6 @@ void MOSAD_O::execute()
         newSolution = problem_->generateRandomSolution();
         problem_->evaluate(&newSolution);
         problem_->evaluateConstraints(&newSolution);
-        //EP->add(newSolution);
         P->add(newSolution);
         obtainIdealPoint(newSolution);
         FE++;
@@ -117,8 +91,8 @@ void MOSAD_O::execute()
 
     while (Ti >= Tf && FE <= MFE) {
 
-        //cout << "Evaluaciones" << FE<<"\n";
-        for (int i = 0; i < N; i++)//por cada subproblema
+        
+        for (int i = 0; i < N; i++)//for each sub-problem
         {
             current = P->get(i);
 

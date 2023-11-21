@@ -40,6 +40,6 @@ class DECISIONAID_LIB Algorithm {
         //BORRAR: para debug
         int repetidos;
         //-----------JMVM Codigo en pruebas -------------------
-        virtual void execute(SolutionSet initialP);
-        virtual void setMFE(int n);
+        //virtual void execute(SolutionSet initialP);
+        //virtual void setMFE(int n);
 };
